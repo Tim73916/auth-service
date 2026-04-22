@@ -74,6 +74,21 @@ func (a *Auth) Login(
 		slog.String("username", email),
 	)
 
+	if email == "" {
+		log.Warn("email is required")
+		return "", fmt.Errorf("%s: %w", op, errors.New("email is required"))
+	}
+
+	if password == "" {
+		log.Warn("password is required")
+		return "", fmt.Errorf("%s: %w", op, errors.New("password is required"))
+	}
+
+	if appID == 0 {
+		log.Warn("app_id is required")
+		return "", fmt.Errorf("%s: %w", op, errors.New("app_id is required"))
+	}
+
 	log.Info("attempting to login user")
 
 	user, err := a.usrProvider.User(ctx, email)
@@ -91,6 +106,7 @@ func (a *Auth) Login(
 
 	if err := bcrypt.CompareHashAndPassword(user.PassHash, []byte(password)); err != nil {
 		a.log.Info("invalid credentials", slog.String("error", err.Error()))
+		return "", fmt.Errorf("%s: %w", op, ErrInvalidCredentials)
 	}
 
 	app, err := a.appProvider.App(ctx, appID)
@@ -117,6 +133,17 @@ func (a *Auth) RegisterNewUser(ctx context.Context, email string, pass string) (
 		slog.String("op", op),
 		slog.String("email", email),
 	)
+
+	if email == "" {
+		log.Warn("email is required")
+		return 0, fmt.Errorf("%s: %w", op, errors.New("email is required"))
+	}
+
+	if pass == "" {
+		log.Warn("password is required")
+		return 0, fmt.Errorf("%s: %w", op, errors.New("password is required"))
+	}
+
 	log.Info("registering user")
 
 	passHash, err := bcrypt.GenerateFromPassword([]byte(pass), bcrypt.DefaultCost)
