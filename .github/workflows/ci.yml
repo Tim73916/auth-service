@@ -27,8 +27,10 @@ jobs:
       - name: Build server
         run: go build -o server ./cmd/sso
       
-      - name: Create storage directory
-        run: mkdir -p storage
+      - name: Create config from example
+        run: |
+          mkdir -p config storage
+          cp config/local.yaml.example config/local.yaml
       
       - name: Show config (debug)
         run: cat config/local.yaml
