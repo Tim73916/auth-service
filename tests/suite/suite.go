@@ -39,7 +39,7 @@ func New(t *testing.T) (context.Context, *Suite) {
 		grpcAddress(cfg),
 		grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		t.Fatal("grpc server connection failed: %v", err)
+		t.Fatalf("grpc server connection failed: %v", err)
 	}
 
 	return ctx, &Suite{
