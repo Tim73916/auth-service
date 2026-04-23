@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	ssov1 "github.com/Tim73916/auth-proto/gen/go/sso"
+	ssov1 "sso/gen/go/sso"
 	"github.com/brianvoe/gofakeit/v6"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/stretchr/testify/assert"
