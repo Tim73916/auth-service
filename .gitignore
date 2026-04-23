@@ -1,0 +1,5 @@
+config/local.yaml
+.env
+*.db
+/sso
+/migrator
