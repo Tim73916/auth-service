@@ -28,4 +28,4 @@ require (
 	olympos.io/encoding/edn v0.0.0-20201019073823-d3554ca0b0a3 // indirect
 )
 
-replace github.com/Tim73916/auth-proto => /home/tim/go/pkg/mod/github.com/tim73916/auth-proto@v1.0.0
+replace github.com/Tim73916/auth-proto => "/home/tim/Рабочий стол/protos"
